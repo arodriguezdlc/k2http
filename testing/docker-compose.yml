@@ -1,0 +1,76 @@
+version: '2'
+
+services:
+  zookeeper-input: 
+    image: 'wurstmeister/zookeeper'
+    networks:
+      - jenkins_network
+  zookeeper-output:
+    image: 'wurstmeister/zookeeper'
+    networks:
+      - jenkins_network
+
+  kafka-input:
+    image: 'wurstmeister/kafka'
+    expose:
+      - '9092'
+    links:
+      - zookeeper-input
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: '172.16.238.100'
+      KAFKA_ADVERTISED_PORT: '9092'
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper-input:2181'
+      KAFKA_CREATE_TOPICS: 'testing:1:1'      
+    networks:
+      jenkins_network:
+        ipv4_address: 172.16.238.100
+
+  kafka-output:
+    image: 'wurstmeister/kafka'
+    expose:
+      - '9092'
+    links:
+      - zookeeper-output
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: '172.16.238.101'
+      KAFKA_ADVERTISED_PORT: '9092'
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper-output:2181'
+      KAFKA_CREATE_TOPICS: 'testing:1:1'
+    networks:
+      jenkins_network:
+        ipv4_address: 172.16.238.101
+ 
+#  n2kafka:
+#    image: 'n2kafka'
+#    environment:
+#      BROKERS: "172.16.238.101:9092"
+#      TOPIC: "testing"
+#    links:
+#      - kafka-output
+#    expose:
+#      - '2057'
+#    networks:
+#      - jenkins_network
+#
+#  k2http:
+#    image: 'k2http'
+#    links:
+#      - n2kafka
+#      - kafka-input
+#    environment:
+#      KAFKA_BROKER: '172.16.238.100:9092'
+#      KAFKA_CONSUMERGROUP: 'k2http-n2kafka'
+#      HTTP_URL: 'http://n2kafka:2057/rbdata/abc'
+#    networks:
+#      - jenkins_network
+
+networks:
+  jenkins_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1
