@@ -32,6 +32,11 @@ test:
 	go test -cover
 	@printf "$(MKL_GREEN)Test passed$(MKL_CLR_RESET)\n"
 
+integration-tests: 
+	@prinf "$(MKL_YELLOW)Running Integration tests$(MKL_CLR_RESET)\n"
+	bash -xe testing/integration.sh
+	@printf "$(MKL_GREEN)Test passed$(MKL_CLR_RESET)\n"
+
 get_dev:
 	@printf "$(MKL_YELLOW)Installing deps$(MKL_CLR_RESET)\n"
 	go get golang.org/x/tools/cmd/cover
