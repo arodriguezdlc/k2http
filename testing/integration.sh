@@ -19,9 +19,10 @@ function exit_test() {
 	exit $1
 }
 
-SCRIPT=$(realpath $0)
-SCRIPTPATH=$(dirname $SCRIPT)
-pushd $SCRIPTPATH &> /dev/null
+#SCRIPT=$(realpath $0)
+#SCRIPTPATH=$(dirname $SCRIPT)
+#pushd $SCRIPTPATH &> /dev/null
+pushd testing &> /dev/null
 
 ###################################
 #stage "Create k2http docker image"

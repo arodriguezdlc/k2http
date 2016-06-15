@@ -10,7 +10,6 @@ services:
 
 before_install: 
   - sudo apt-get -qq update
-  - sudo apt-get install -y coreutils
 
 install:
   - make get
