@@ -17,4 +17,4 @@ script :
   - make fmt
   - make vet
   - make test
-  - make integration-test
+  - make integration-tests
