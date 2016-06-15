@@ -33,7 +33,7 @@ test:
 	@printf "$(MKL_GREEN)Test passed$(MKL_CLR_RESET)\n"
 
 integration-tests: 
-	@prinf "$(MKL_YELLOW)Running Integration tests$(MKL_CLR_RESET)\n"
+	@printf "$(MKL_YELLOW)Running Integration tests$(MKL_CLR_RESET)\n"
 	bash -x testing/integration.sh
 	@printf "$(MKL_GREEN)Test passed$(MKL_CLR_RESET)\n"
 
