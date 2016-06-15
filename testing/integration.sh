@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 
 function stage() {
 	echo "###########################################"
@@ -7,7 +7,7 @@ function stage() {
 }
 
 function docker_exec() {
-	CONTAINTER_NAME=$1
+	CONTAINER_NAME=$1
 	COMMAND=$2
 	CONTAINER_ID=$(docker ps | grep "$CONTAINER_NAME" | awk '{print $1}' )
 	docker exec -i $CONTAINER_ID sh -c "$COMMAND"

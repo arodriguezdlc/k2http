@@ -34,7 +34,7 @@ test:
 
 integration-tests: 
 	@printf "$(MKL_YELLOW)Running Integration tests$(MKL_CLR_RESET)\n"
-	bash -x testing/integration.sh
+	bash testing/integration.sh
 	@printf "$(MKL_GREEN)Test passed$(MKL_CLR_RESET)\n"
 
 get_dev:
