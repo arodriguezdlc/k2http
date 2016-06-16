@@ -10,7 +10,7 @@ RUN pip install j2cli
 
 ADD k2http-supervisor.conf /etc/supervisor/conf.d/
 
-ADD ../k2http /app/ 
+ADD k2http /app/ 
 ADD k2http_config.template /app/
 
 ADD bootstrap.sh /app/

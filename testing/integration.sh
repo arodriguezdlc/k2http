@@ -27,6 +27,7 @@ pushd testing &> /dev/null
 ###################################
 stage "Create k2http docker image"
 ###################################
+cp ../k2http .
 docker build -t k2http . || exit 1
  
 ###################################
