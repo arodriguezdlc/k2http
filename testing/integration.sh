@@ -27,10 +27,8 @@ pushd testing &> /dev/null
 ###################################
 stage "Create k2http docker image"
 ###################################
-pushd .. &> /dev/null
-docker build -t k2http . 
-if [ $? -ne 0 ] ; then popd &> /dev/null ; exit 1 ; fi 
-popd &> /dev/null 
+docker build -t k2http . || exit 1
+ 
 ###################################
 stage "Create n2kafka docker image"
 ###################################
