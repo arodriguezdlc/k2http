@@ -40,29 +40,29 @@ services:
       jenkins_network:
         ipv4_address: 172.16.238.101
  
-#  n2kafka:
-#    image: 'n2kafka'
-#    environment:
-#      BROKERS: "172.16.238.101:9092"
-#      TOPIC: "testing"
-#    links:
-#      - kafka-output
-#    expose:
-#      - '2057'
-#    networks:
-#      - jenkins_network
-#
-#  k2http:
-#    image: 'k2http'
-#    links:
-#      - n2kafka
-#      - kafka-input
-#    environment:
-#      KAFKA_BROKER: '172.16.238.100:9092'
-#      KAFKA_CONSUMERGROUP: 'k2http-n2kafka'
-#      HTTP_URL: 'http://n2kafka:2057/rbdata/abc'
-#    networks:
-#      - jenkins_network
+  n2kafka:
+    image: 'n2kafka'
+    environment:
+      BROKERS: "172.16.238.101:9092"
+      TOPIC: "testing"
+    links:
+      - kafka-output
+    expose:
+      - '2057'
+    networks:
+      - jenkins_network
+
+  k2http:
+    image: 'k2http'
+    links:
+      - n2kafka
+      - kafka-input
+    environment:
+      KAFKA_BROKER: '172.16.238.100:9092'
+      KAFKA_CONSUMERGROUP: 'k2http-n2kafka'
+      HTTP_URL: 'http://n2kafka:2057/rbdata/abc'
+    networks:
+      - jenkins_network
 
 networks:
   jenkins_network:

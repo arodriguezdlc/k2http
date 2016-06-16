@@ -1,0 +1,18 @@
+backend:
+  workers: 1
+  queue: 100
+  retries: 3
+  backoff: 5
+  showcounter: 5
+kafka:
+  # begining: true
+  broker: {{KAFKA_BROKER}}
+  consumergroup: {{KAFKA_CONSUMERGROUP}}
+  topics:
+    - "testing"
+http:
+  url: {{HTTP_URL}}
+  batchsize: 100
+  batchtimeout: 500
+  deflate: true
+  endpoint: topic

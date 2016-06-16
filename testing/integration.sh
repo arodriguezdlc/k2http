@@ -27,12 +27,17 @@ pushd testing &> /dev/null
 ###################################
 #stage "Create k2http docker image"
 ###################################
-#pushd .. &> /dev/null
-
+pushd .. &> /dev/null
+docker build -t k2http .
+popd &> /dev/null
 ###################################
 #stage "Create n2kafka docker image"
 ###################################
-#git clone  
+git clone https://github.com/arodriguezdlc/n2kafka.git
+pushd n2kafka &> /dev/null
+git checkout --track origin/continuous-integration 
+docker build -t n2kafka .
+popd &> /dev/null
 
 #############################
 stage "Create environment"
@@ -44,17 +49,6 @@ stage "Make integration tests"
 ##############################
 docker_exec kafka-input "timeout 10 echo '{}' | /opt/kafka_*/bin/kafka-console-producer.sh --topic testing --broker-list 172.16.238.100:9092" || exit_test 1
 docker_exec kafka-output "timeout 30 /opt/kafka_*/bin/kafka-console-consumer.sh --topic testing --zookeeper zookeeper-output:2181 --max-messages 1" || exit_test 1
-
-
-
-
-
-
-
-
-
-
-
 
 
 
