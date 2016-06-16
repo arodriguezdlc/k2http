@@ -8,10 +8,10 @@ RUN apt-get update && \
 
 RUN pip install j2cli
 
-ADD supervisor/k2http.conf /etc/supervisor/conf.d/
+ADD k2http-supervisor.conf /etc/supervisor/conf.d/
 
 ADD ../k2http /app/ 
-ADD templates/config.template /app/
+ADD k2http_config.template /app/
 
 ADD bootstrap.sh /app/
 
