@@ -38,7 +38,7 @@ pushd testing &> /dev/null
 stage "Create environment"
 #############################
 docker-compose up -d || exit_test 1
-
+sleep 30
 ##############################
 stage "Make integration tests"
 ##############################
