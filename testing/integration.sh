@@ -25,18 +25,20 @@ function exit_test() {
 pushd testing &> /dev/null
 
 ###################################
-#stage "Create k2http docker image"
+stage "Create k2http docker image"
 ###################################
 pushd .. &> /dev/null
-docker build -t k2http .
-popd &> /dev/null
+docker build -t k2http . 
+if [ $? -ne 0 ] ; then popd &> /dev/null ; exit 1 ; fi 
+popd &> /dev/null 
 ###################################
-#stage "Create n2kafka docker image"
+stage "Create n2kafka docker image"
 ###################################
 git clone https://github.com/arodriguezdlc/n2kafka.git
 pushd n2kafka &> /dev/null
 git checkout --track origin/continuous-integration 
 docker build -t n2kafka .
+if [ $? -ne 0 ] ; then popd &> /dev/null ; exit 1 ; fi
 popd &> /dev/null
 
 #############################
