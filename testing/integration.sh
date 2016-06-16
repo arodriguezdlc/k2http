@@ -42,8 +42,8 @@ docker-compose up -d || exit_test 1
 ##############################
 stage "Make integration tests"
 ##############################
-docker_exec kafka-input "timeout 10 echo '{}' | /opt/kafka_2.11-0.9.0.1/bin/kafka-console-producer.sh --topic testing --broker-list 172.16.238.100:9092" || exit_test 1
-docker_exec kafka-output "timeout 30 /opt/kafka_2.11-0.9.0.1/bin/kafka-console-consumer.sh --topic testing --zookeeper zookeeper-output:2181 --max-messages 1" || exit_test 1
+docker_exec kafka-input "timeout 10 echo '{}' | /opt/kafka_*/bin/kafka-console-producer.sh --topic testing --broker-list 172.16.238.100:9092" || exit_test 1
+docker_exec kafka-output "timeout 30 /opt/kafka_*/bin/kafka-console-consumer.sh --topic testing --zookeeper zookeeper-output:2181 --max-messages 1" || exit_test 1
 
 
 
