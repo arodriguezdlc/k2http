@@ -50,7 +50,7 @@ docker_exec kafka-input "timeout 10 echo '{}' | /opt/kafka_*/bin/kafka-console-p
 echo "ok"
 echo -n "Getting the message... "
 docker_exec kafka-output "timeout 60 /opt/kafka_*/bin/kafka-console-consumer.sh --topic testing --zookeeper zookeeper-output:2181 --max-messages 1" #|| exit_test 1
-docker exec k2http "tail -n 1000 /etc/supervisor/*"
-docker exec n2kafka "cat /etc/n2kafka.log"
+docker_exec k2http "tail -n 1000 /etc/supervisor/*"
+docker_exec n2kafka "cat /etc/n2kafka.log"
 echo "ok"
 popd &> /dev/null
