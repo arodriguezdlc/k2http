@@ -19,9 +19,6 @@ function exit_test() {
 	exit $1
 }
 
-#SCRIPT=$(realpath $0)
-#SCRIPTPATH=$(dirname $SCRIPT)
-#pushd $SCRIPTPATH &> /dev/null
 pushd testing &> /dev/null
 
 ###################################
@@ -48,9 +45,10 @@ echo -n "sleeping 30 seconds..." && sleep 30 && echo "finish"
 ##############################
 stage "Make integration tests"
 ##############################
+echo -n "Producing a message..."
 docker_exec kafka-input "timeout 10 echo '{}' | /opt/kafka_*/bin/kafka-console-producer.sh --topic testing --broker-list 172.16.238.100:9092" || exit_test 1
+echo " ok"
+echo -n "Getting the message..."
 docker_exec kafka-output "timeout 30 /opt/kafka_*/bin/kafka-console-consumer.sh --topic testing --zookeeper zookeeper-output:2181 --max-messages 1" || exit_test 1
-
-
-
+echo " ok"
 popd &> /dev/null
