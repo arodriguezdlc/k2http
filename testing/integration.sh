@@ -41,7 +41,7 @@ popd &> /dev/null
 stage "Create environment"
 #############################
 docker-compose up -d || exit_test 1
-echo -n "sleeping 60 seconds..." && sleep 30 && echo "finish"
+echo -n "sleeping 60 seconds..." && sleep 60 && echo "finish"
 ##############################
 stage "Make integration tests"
 ##############################
@@ -49,6 +49,6 @@ echo -n "Producing a message... "
 docker_exec kafka-input "timeout 10 echo '{}' | /opt/kafka_*/bin/kafka-console-producer.sh --topic testing --broker-list 172.16.238.100:9092" || exit_test 1
 echo "ok"
 echo -n "Getting the message... "
-docker_exec kafka-output "timeout 30 /opt/kafka_*/bin/kafka-console-consumer.sh --topic testing --zookeeper zookeeper-output:2181 --max-messages 1" || exit_test 1
+docker_exec kafka-output "timeout 60 /opt/kafka_*/bin/kafka-console-consumer.sh --topic testing --zookeeper zookeeper-output:2181 --max-messages 1" || exit_test 1
 echo "ok"
 popd &> /dev/null
