@@ -40,6 +40,7 @@ popd &> /dev/null
 #############################
 stage "Create environment"
 #############################
+sudo docker-compose down
 sudo docker-compose up -d || exit_test 1
 echo -n "sleeping 60 seconds..." && sleep 60 && echo "finish"
 ##############################
@@ -50,7 +51,7 @@ docker_exec kafka-input "timeout 10 echo '{}' | /opt/kafka_*/bin/kafka-console-p
 echo "ok"
 echo -n "Getting the message... "
 docker_exec kafka-output "timeout 60 /opt/kafka_*/bin/kafka-console-consumer.sh --topic testing --zookeeper zookeeper-output:2181 --max-messages 1" #|| exit_test 1
-docker_exec k2http "tail -n 1000 /etc/supervisor/*"
-docker_exec n2kafka "cat /etc/n2kafka.log"
+docker_exec k2http "tail -n 10000 /var/log/supervisor/*"
+docker_exec n2kafka "cat /var/log/n2kafka.log"
 echo "ok"
 popd &> /dev/null
