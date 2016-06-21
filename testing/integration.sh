@@ -41,7 +41,8 @@ popd &> /dev/null
 stage "Create environment"
 #############################
 sudo docker-compose down
-timeout 120 sudo docker-compose up || exit_test 1
+sudo docker-compose up || exit_test 1
+timeout 120 docker-compose logs
 echo -n "sleeping 60 seconds..." && sleep 60 && echo "finish"
 ##############################
 stage "Make integration tests"
