@@ -42,8 +42,7 @@ stage "Create environment"
 #############################
 sudo docker-compose down
 sudo docker-compose up || exit_test 1
-timeout 120 docker-compose logs
-echo -n "sleeping 60 seconds..." && sleep 60 && echo "finish"
+echo -n "sleeping 100 seconds..." && sleep 100 && echo "finish"
 ##############################
 stage "Make integration tests"
 ##############################i
