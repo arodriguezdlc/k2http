@@ -41,7 +41,7 @@ popd &> /dev/null
 stage "Create environment"
 #############################
 sudo docker-compose up -d || exit_test 1
-timeout 100 sudo docker-compose logs 
+timeout 100 sudo docker-compose logs -f
 
 #echo -n "sleeping 100 seconds..." && sleep 100 && echo "finish"
 ##############################
