@@ -2,11 +2,18 @@ sudo: required
 
 language: go
 
-go: 
+go:
   - 1.6.2
 
-services:
-  - docker
+branches:
+  only:
+    - master
+    - develop
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
 
 env:
   global
@@ -30,9 +37,9 @@ before_install:
 install:
   - make get
   - make get_dev
-  - make
 
 script :
+  - make
   - make fmt
   - make vet
   - make test
