@@ -1,15 +1,18 @@
 sudo: required
+dist: trusty
 
 language: go
 
-go: 
+go:
   - 1.6.2
 
-services:
-  - docker
+notifications:
+  email:
+    on_success: never
+    on_failure: always
 
 env:
-  global
+  global:
     - DOCKER_VERSION=1.10.1-0~trusty
     - DOCKER_COMPOSE_VERSION=1.7.1
 
@@ -30,9 +33,9 @@ before_install:
 install:
   - make get
   - make get_dev
-  - make
 
 script :
+  - make
   - make fmt
   - make vet
   - make test

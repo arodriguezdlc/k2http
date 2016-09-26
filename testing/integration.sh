@@ -43,7 +43,7 @@ stage "Create environment"
 docker-compose down
 docker-compose up -d || exit_test 1
 
-echo -n "sleeping 100 seconds..." && sleep 100 && echo "finish"
+echo -n "sleeping 30 seconds..." && sleep 30 && echo "finish"
 ##############################
 stage "Make integration tests"
 ##############################i
