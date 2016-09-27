@@ -1,0 +1,31 @@
+pipeline:
+  queue: 1000                     # Max internal queue size
+  backoff: 10                     # Time to wait between retries in seconds             
+  retries: 3                      # Number of retries on fail (-1 not limited)
+
+limiter:
+  max_messages: 5000              # Max messages per second
+  # max_bytes: 5242880            # Max bytes per second
+
+kafka:
+  broker: "localhost:9092"        # Kafka brokers
+  consumergroup: "k2http"         # Consumer group ID   
+  topics:                         # Kafka topics to listen
+  - rb_nmsp
+  - rb_radius
+  - rb_flow
+  - rb_loc
+  - rb_monitor
+  - rb_state
+  - rb_social
+
+batch:      
+  workers: 1                      # Number of workers
+  size: 1000                      # Max messages per batch
+  timeoutMillis: 100              # Max time to wait for send a batch
+  deflate: false                  # Use deflate to compress batches
+
+http:
+  workers: 1
+  url: "http://localhost:8888"    # Number of workers, one connection per worker
+  insecure: false                 # Skip SSSL verification
